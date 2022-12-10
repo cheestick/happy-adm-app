@@ -24,14 +24,18 @@ export const Wrapper = tw.div<WrapperProps>`
 
 export const MainHeading = tw.h1`
   text-8xl
-  font-bold
   underline
+  font-bold
+  font-['Helvetica']
   
   text-center
   align-middle
 
+
+
   last:-mt-[5.8rem]
   last:-ml-3
+
   last:text-indigo-300
   hover:last:text-indigo-400
 
