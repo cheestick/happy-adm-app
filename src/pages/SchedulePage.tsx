@@ -1,16 +1,18 @@
-import { useFetchUsers } from '../hooks/useFetchUsers'
+import UserAvatar from '../components/UserAvatar'
 import { Section, Wrapper } from './SchedulePage.twstyled'
 
 const SchedulePage = () => {
-  const [user] = useFetchUsers()
   
   return (
     <Section>
       
-        <Wrapper>
-          <h1>{user?.name?.first}</h1>
-          <img src={user?.picture?.large} alt={`${user?.name?.first} photo`} />
-        </Wrapper>
+      <Wrapper>
+        <div className='flex gap-6 my-3'>
+          <UserAvatar trainingStatus='operate'/>
+          <UserAvatar trainingStatus='train'/>
+          <UserAvatar hasDayoff/>
+        </div>
+      </Wrapper>
 
     </Section>
   )
