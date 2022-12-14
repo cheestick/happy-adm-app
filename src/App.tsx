@@ -1,13 +1,8 @@
-import {Hero, Wrapper, MainHeading} from './App.styled'
+import SchedulePage from './pages/SchedulePage'
 
 function App() {
   return (
-    <Hero>
-      <Wrapper $center >
-        <MainHeading>Vite React TS</MainHeading>
-        <MainHeading>Vite React TS</MainHeading>
-      </Wrapper>
-    </Hero>
+    <SchedulePage />
   )
 }
 
