@@ -62,14 +62,18 @@ type TTrainingStatusBadgeProps = {
   status: TTrainingStatus
 }
 
-const trainingStatusBadgeStylesConfig: { [key:string]: string } = {
+type TTrainerCurrentStatus = {
+  [key in TTrainingStatus]: string
+}
+
+const trainerCurrentStatusBadgeStyles: TTrainerCurrentStatus = {
   idle: 'before:content-["I"]',
   train: 'before:content-["T"]',
   operate: 'before:content-["P"]'
 }
 
 export const TrainingStatusBadge = tw.div<TTrainingStatusBadgeProps>`
-  ${({ status }) => trainingStatusBadgeStylesConfig[status]}
+  ${({ status }) => trainerCurrentStatusBadgeStyles[status]}
 
   flex
   place-content-center
