@@ -6,23 +6,37 @@ export const UserAvatarSection = tw.section`
   flex
   flex-col-reverse
   items-center
-  gap-y-2
+  gap-y-1
 
   relative
 
   mx-auto
 
   cursor-pointer
-
-  backdrop-blur-sm
+  group
 `
 
 export const AvatarTitle = tw.h1`
-  h-4
-  
+  rounded-full
+
+  bg-white/40
+  backdrop-blur-md
+
+  -mt-4
+  px-2.5
+  py-1
+
+  z-10
+
+  max-w-[11ch]
+
+  overflow-hidden
+  overflow-ellipsis
+
+  text-xs
+  text-center
   font-semibold
   leading-none
-  text-center
 `
 
 type AvatarPictureProps = {
@@ -33,11 +47,11 @@ export const AvatarPicture = tw.img<AvatarPictureProps>`
   ${({ $dayoff = false }) => $dayoff ? 'saturate-0' : null }
   w-[65px]
   h-[65px]
-  sm:w-[85px]
-  sm:h-[85px]
+  sm:w-[65px]
+  sm:h-[65px]
 
   min-w-[65px]
-  max-w-[85px]
+  max-w-[65px]
   
   aspect-square
   
@@ -47,6 +61,10 @@ export const AvatarPicture = tw.img<AvatarPictureProps>`
   object-center
 
   bg-zinc-200
+
+  
+  transition-shadow
+  group-hover:shadow-lg
 `
 
 export const UserStatusNimbus = tw.div<AvatarPictureProps>`
