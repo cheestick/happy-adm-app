@@ -1,4 +1,5 @@
 import UserAvatar from '../components/UserAvatar'
+import { trainingStatus } from '../components/UserAvatar/UserAvatar'
 import { Section, Wrapper } from './SchedulePage.twstyled'
 
 const SchedulePage = () => {
@@ -8,9 +9,10 @@ const SchedulePage = () => {
       
       <Wrapper>
         <div className='flex gap-6 my-3'>
-          <UserAvatar trainingStatus='operate'/>
-          <UserAvatar trainingStatus='train'/>
-          <UserAvatar hasDayoff/>
+          <UserAvatar trainerStatus={trainingStatus.OPERATE} />
+          <UserAvatar trainerStatus={trainingStatus.TRAIN} />
+          <UserAvatar trainerStatus={trainingStatus.IDLE} />
+          <UserAvatar hasDayoff />
         </div>
       </Wrapper>
 

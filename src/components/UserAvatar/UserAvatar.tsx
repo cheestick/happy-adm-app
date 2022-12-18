@@ -1,4 +1,5 @@
 import { useFetchUsers } from '../../hooks/useFetchUsers'
+import { TConstTrainingStatusObject } from './types'
 import { AvatarPicture, AvatarTitle, TrainingStatusBadge, UserAvatarSection, UserStatusNimbus } from './UserAvatar.twstyled'
 
 const avatarSize = {
@@ -6,27 +7,33 @@ const avatarSize = {
   lg: 85,
 } as const
 
-export type TTrainingStatus = 'train' | 'operate' | 'idle'
+export type TTrainingStatus = Uppercase<'train' | 'operate' | 'idle'>
+
+export const trainingStatus: TConstTrainingStatusObject = {
+  IDLE: 'IDLE',
+  TRAIN: 'TRAIN',
+  OPERATE: 'OPERATE',
+}
 
 interface IUserAvatar {
   hasDayoff?: boolean
-  trainingStatus?: TTrainingStatus
+  trainerStatus?: TTrainingStatus
 }
 
-const UserAvatar = ({hasDayoff = false, trainingStatus = 'idle'}: IUserAvatar) => {
+const UserAvatar = ({hasDayoff = false, trainerStatus = trainingStatus.IDLE}: IUserAvatar) => {
   const [user] = useFetchUsers()
   return (
     <UserAvatarSection>
       <AvatarTitle>{user?.name?.first}</AvatarTitle>
-      <UserStatusNimbus>
+      <UserStatusNimbus $dayoff={hasDayoff}>
         <AvatarPicture
           width={avatarSize.sm} height={avatarSize.sm}
           src={user?.picture?.medium}
           alt={user ? `${user?.name?.first} photo` : ''}
-          dayoff={hasDayoff}
+          $dayoff={hasDayoff}
         />
       </UserStatusNimbus>
-      <TrainingStatusBadge status={trainingStatus} />
+      <TrainingStatusBadge $status={trainerStatus} $dayoff={hasDayoff} />
     </UserAvatarSection>
   )
 }

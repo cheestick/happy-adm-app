@@ -1,4 +1,5 @@
 import tw from 'tailwind-styled-components'
+import { TTrainerCurrentStatus } from './types'
 import { TTrainingStatus } from './UserAvatar'
 
 export const UserAvatarSection = tw.section`
@@ -17,19 +18,19 @@ export const UserAvatarSection = tw.section`
 `
 
 export const AvatarTitle = tw.h1`
+  h-4
+  
   font-semibold
   leading-none
   text-center
-
-  h-4
 `
 
 type AvatarPictureProps = {
-  dayoff: boolean
+  $dayoff: boolean
 }
 
 export const AvatarPicture = tw.img<AvatarPictureProps>`
-  ${({ dayoff }) => dayoff ? 'saturate-0' : null }
+  ${({ $dayoff = false }) => $dayoff ? 'saturate-0' : null }
   w-[65px]
   h-[65px]
   sm:w-[85px]
@@ -48,41 +49,36 @@ export const AvatarPicture = tw.img<AvatarPictureProps>`
   bg-zinc-200
 `
 
-export const UserStatusNimbus = tw.div`
+export const UserStatusNimbus = tw.div<AvatarPictureProps>`
+  ${({ $dayoff = false }) => $dayoff ? 'border-transparent' :  'border-emerald-500/70' }
   p-1
 
   border-2 
-  rounded-full 
-  border-emerald-500/70
+  rounded-full
 
   bg-transparent
 `
 
-type TTrainingStatusBadgeProps = {
-  status: TTrainingStatus
-}
 
-type TTrainerCurrentStatus = {
-  [key in TTrainingStatus]: string
+type TTrainingStatusBadgeProps = AvatarPictureProps & {
+  $status: TTrainingStatus
 }
 
 const trainerCurrentStatusBadgeStyles: TTrainerCurrentStatus = {
-  idle: 'before:content-["I"]',
-  train: 'before:content-["T"]',
-  operate: 'before:content-["P"]'
+  idle: 'before:content-["I"] bg-emerald-400 border-emerald-100',
+  train: 'before:content-["T"] bg-red-400 border-red-100',
+  operate: 'before:content-["P"] bg-amber-400 border-amber-100'
 }
 
 export const TrainingStatusBadge = tw.div<TTrainingStatusBadgeProps>`
-  ${({ status }) => trainerCurrentStatusBadgeStyles[status]}
-
   flex
   place-content-center
-
-  absolute 
   
+  absolute 
+
   w-5
   h-5
-  
+
   aspect-square 
   
   border-2
@@ -90,14 +86,22 @@ export const TrainingStatusBadge = tw.div<TTrainingStatusBadgeProps>`
 
   inset-x-3/4 
   inset-y-1 
-
-  bg-stone-400
   
   before:self-center
   before:text-[0.7rem]
   before:leading-none
   before:uppercase
   before:text-white
+
+  ${({ $status, $dayoff = false }) => {
+  const hasDayoff = $dayoff ? 'invisible' : ''
+  
+  // Ok, I solved this but did I get it?
+  const status = $status.toLowerCase() as keyof TTrainerCurrentStatus
+  
+  return `${hasDayoff} ${trainerCurrentStatusBadgeStyles[status]}`
+  }}
+
 `
 
 export const Divider = tw.div`
