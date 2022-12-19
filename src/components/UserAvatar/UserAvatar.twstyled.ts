@@ -19,24 +19,32 @@ export const UserAvatarSection = tw.section`
 export const AvatarTitle = tw.h1`
   rounded-full
 
-  bg-white/40
-  backdrop-blur-md
+  max-w-[11ch]
+  min-w-[4ch]
+  h-5
 
   -mt-4
   px-2.5
   py-1
-
+  
   z-10
-
-  max-w-[11ch]
+  
+  bg-white/40
+  backdrop-blur-md
 
   overflow-hidden
   overflow-ellipsis
 
+  break-keep
+  whitespace-nowrap
   text-xs
   text-center
   font-semibold
   leading-none
+
+  transition-colors
+  group-hover:bg-white/80
+  group-hover:shadow-lg
 `
 
 type AvatarPictureProps = {
@@ -63,18 +71,22 @@ export const AvatarPicture = tw.img<AvatarPictureProps>`
   bg-zinc-200
 
   
-  transition-shadow
+  transition-all
   group-hover:shadow-lg
+  group-hover:scale-110
 `
 
 export const UserStatusNimbus = tw.div<AvatarPictureProps>`
-  ${({ $dayoff = false }) => $dayoff ? 'border-transparent' :  'border-emerald-500/70' }
-  p-1
+  p-0.5
 
-  border-2 
+  border-4
   rounded-full
 
   bg-transparent
+
+  ${({ $dayoff = false }) => $dayoff
+    ? 'border-white/20'
+    : 'border-green-400' }
 `
 
 
@@ -94,8 +106,8 @@ export const TrainingStatusBadge = tw.div<TTrainingStatusBadgeProps>`
   
   absolute 
 
-  w-5
-  h-5
+  w-[1.15rem]
+  h-[1.15rem]
 
   aspect-square 
   
@@ -110,6 +122,9 @@ export const TrainingStatusBadge = tw.div<TTrainingStatusBadgeProps>`
   before:leading-none
   before:uppercase
   before:text-white
+
+  transition-all
+  group-hover:scale-75
 
   ${({ $status, $dayoff = false }) => {
   const hasDayoff = $dayoff ? 'invisible' : ''
