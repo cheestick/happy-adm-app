@@ -20,7 +20,7 @@ export interface ISet {
   riders: IUser[] // 1 or more riders/contacts
 }
 
-type TUserType = 'super' | 'admin' | 'trainer' | 'rider'
+type TUserRole = 'super' | 'admin' | 'trainer' | 'rider'
 type TUserName = string
 type TNickName = string
 type TUserContacts = {
@@ -31,7 +31,7 @@ type TUserContacts = {
 
 export interface IUser{
   id: TDatabaseID
-  type: TUserType
+  role: TUserRole
   username: TUserName
   nickname: TNickName
   contacts: TUserContacts
