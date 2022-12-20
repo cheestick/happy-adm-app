@@ -12,7 +12,7 @@ export interface ICableLine {
 
 export interface ISet {
   id: TDatabaseID
-  status: 'busy' | 'idle' | 'prophylaxy'
+  status: 'busy' | 'idle' | 'prophylaxy' | 'empty'
   duration: number // minutes
   startTime: Date // hh:mm
   date: Date // yyyy:mm
