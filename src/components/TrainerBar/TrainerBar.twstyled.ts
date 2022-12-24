@@ -20,7 +20,7 @@ export const Bar = tw.section`
   snap-mandatory
   snap-x
 
-  bg-white/30
+  bg-black/30
   backdrop-blur-md
   shadow-lg
 `
